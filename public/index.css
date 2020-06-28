@@ -1,0 +1,120 @@
+@font-face {
+  font-family: "overpassFont";
+  src: URL("/fonts/Overpass-Light.ttf") format("truetype");
+}
+
+body {
+  background-color: linen;
+  font-size: 16px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-family: "overpassFont", sans-serif;
+}
+
+div {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+h1,
+h4 {
+  color: maroon;
+}
+
+.button {
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 8px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.buttonJS {
+  background-color: white;
+  color: rgb(85, 85, 85);
+  border: 2px solid #39cff5;
+}
+
+.buttonJS:hover {
+  background-color: #41c3e4;
+  color: white;
+}
+
+.siteLinks {
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: auto;
+  margin: 0 -1em;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: white;
+}
+
+.siteLinks div {
+  display: flex;
+  width: auto;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em;
+  width: 20%;
+  margin: 0 0.25em;
+}
+
+.siteLinks a {
+  color: rgb(85, 85, 85);
+  padding: 0.25em;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  text-decoration: none;
+  transition-duration: 0.4s;
+}
+
+.siteLinks a:hover {
+  border: 2px solid #39cff5;
+}
+
+.staggerA {
+  opacity: 1;
+  animation: fade-in 1s linear 0.5s 1 forwards;
+}
+
+.staggerB {
+  opacity: 1;
+  animation: fade-in 1s linear 1.25s 1 forwards;
+}
+
+.staggerC {
+  opacity: 1;
+  animation: fade-in 1s linear 3s 1 forwards;
+}
+
+.staggerD {
+  opacity: 1;
+  animation: fade-in 1s linear 5.5s 1 forwards;
+}
+
+.staggerE {
+  font-size: 22px;
+  height: 100px;
+  opacity: 1;
+  animation: fade-in 1s linear 7s 1 forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
