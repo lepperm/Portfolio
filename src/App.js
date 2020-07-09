@@ -84,7 +84,7 @@ function App() {
               <Button
                 variant="outlined"
                 size="large"
-                href="http://localhost:3000#about"
+                href="#about"
                 style={{
                   border: "3px solid",
                   borderRadius: "0px",
@@ -450,7 +450,6 @@ function App() {
                       View my resume
                     </Button>
                   </div>
-
                   <Typography variant="h6">
                     <br />I also have references and a full CV upon request.
                   </Typography>
