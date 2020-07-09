@@ -3,20 +3,20 @@
 export default {
   particles: {
     number: {
-      value: 30,
+      value: 50,
       density: {
         enable: true,
         value_area: 800,
       },
     },
     color: {
-      value: "#0000ff",
+      value: "#8bb3a7",
     },
     shape: {
       type: "circle",
       stroke: {
         width: 0,
-        color: "#ff0000",
+        color: "#b1c9c2",
       },
       polygon: {
         nb_sides: 5,
@@ -28,10 +28,10 @@ export default {
       },
     },
     opacity: {
-      value: 0.5,
+      value: 0.3,
       random: false,
       anim: {
-        enable: false,
+        enable: true,
         speed: 0.1,
         opacity_min: 0.1,
         sync: false,
@@ -41,8 +41,8 @@ export default {
       value: 3,
       random: true,
       anim: {
-        enable: false,
-        speed: 1,
+        enable: true,
+        speed: 3,
         size_min: 0.1,
         sync: false,
       },
@@ -50,15 +50,15 @@ export default {
     line_linked: {
       enable: true,
       distance: 150,
-      color: "#00ff00",
-      opacity: 0.4,
+      color: "#91a8a1",
+      opacity: 0.2,
       width: 1,
     },
     move: {
       enable: true,
-      speed: 1,
+      speed: 0.5,
       direction: "top-right",
-      random: false,
+      random: true,
       straight: false,
       out_mode: "out",
       bounce: false,
@@ -77,8 +77,8 @@ export default {
         mode: "bubble",
       },
       onclick: {
-        enable: false,
-        mode: "push",
+        enable: true,
+        mode: "repulse",
       },
       resize: true,
     },
@@ -90,18 +90,18 @@ export default {
         },
       },
       bubble: {
-        distance: 50,
+        distance: 150,
         size: 5,
         duration: 2,
-        opacity: 8,
-        speed: 2,
+        opacity: 0.8,
+        speed: 0.1,
       },
       repulse: {
-        distance: 200,
-        duration: 0.4,
+        distance: 150,
+        duration: 50.4,
       },
       push: {
-        particles_nb: 4,
+        particles_nb: 0.5,
       },
       remove: {
         particles_nb: 2,
