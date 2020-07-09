@@ -7,8 +7,10 @@ import {
   CardHeader,
   CardContent,
   CardMedia,
+  CardActions,
   Collapse,
   Button,
+  IconButton,
   SvgIcon,
   Chip,
   Tooltip,
@@ -21,19 +23,25 @@ import {
 
 import EmailIcon from "@material-ui/icons/Email";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
-
 import StarsIcon from "@material-ui/icons/Stars";
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import GradeIcon from "@material-ui/icons/Grade";
+import GetAppIcon from "@material-ui/icons/GetApp";
 import { ReactComponent as GitLabIcon } from "./images/icons/gitlab_icon.svg";
 
-import { motion, useViewportScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import TextLoop from "react-text-loop";
 import ReactParticles from "react-particles-js";
 import particlesConfig from "./particles-config.js";
-import { Document, Page } from "react-pdf";
 
 import { ReactComponent as ArrowPrimary } from "./ui/arrow_primary.svg";
+
+import resumeDoc from "./docs/ML_070820_resume.pdf";
+
+import agwsuImg from "./images/photos/agwsu.png";
+import firstKommandImg from "./images/photos/FirstKommand.png";
+import rttdImg from "./images/photos/RealtimeTo-Do.png";
+
 import "./App.css";
 
 function Particles({ children }) {
@@ -59,12 +67,12 @@ function App() {
   return (
     <div className="App" style={{ height: "100vh", overflow: "hidden" }}>
       <div className="AppContent">
-        <section href="landing" style={{ height: "100vh" }}>
+        <section href="landing" style={{ height: "100vh", padding: "0 1em" }}>
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              height: "95%",
+              height: "100%",
               justifyContent: "center",
               alignContent: "center",
             }}
@@ -98,6 +106,7 @@ function App() {
               y: [0, -10, 0],
             }}
             transition={{ ease: "easeInOut", loop: Infinity, duration: 2 }}
+            style={{ position: "relative", bottom: "2em" }}
           >
             <ArrowPrimary style={{ width: "5vw" }} />
           </motion.div>
@@ -107,7 +116,7 @@ function App() {
             container
             direction="row"
             justify="space-evenly"
-            alignItems="center"
+            alignItems="stretch"
             spacing={3}
           >
             <Grid item xs={12} md={8}>
@@ -139,7 +148,9 @@ function App() {
               </Card>
             </Grid>
             <Grid item xs={12} md={4}>
-              <div>Skills & Experience</div>
+              <Typography variant="h5" gutterBottom>
+                Skills & Experience
+              </Typography>
               <Grid container justify="space-evenly" alignItems="center">
                 <Chip
                   variant="outlined"
@@ -194,21 +205,75 @@ function App() {
           </Grid>
         </section>
         <section id="projects">
-          <div>Projects</div>
+          <Typography variant="h4" gutterBottom>
+            Projects
+          </Typography>
           <Grid
             container
             justify="space-evenly"
-            alignItems="center"
+            alignItems="stretch"
             spacing={3}
+            style={{
+              minWidth: "200px",
+            }}
           >
             <Grid item xs={12} md={6} lg={4}>
-              <Card>AGWSU</Card>
+              <Card style={{ height: "100%" }}>
+                <CardMedia
+                  image={agwsuImg}
+                  title="Adventurer's Guild Wright State University"
+                  style={{
+                    height: 0,
+                    backgroundPosition: "center 0",
+                    minWidth: "200px",
+                    paddingTop: "56.25%", // 16:9
+                  }}
+                />
+                <CardContent>
+                  <Typography variant="body2" component="p">
+                    Adventurer's Guild Wright State University
+                  </Typography>
+                </CardContent>
+              </Card>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
-              <Card>Cyclone Mixer</Card>
+              <Card style={{ height: "100%" }}>
+                <CardMedia
+                  image={firstKommandImg}
+                  title="First Kommand Cyklone Mixer"
+                  style={{
+                    height: 0,
+                    backgroundPosition: "center 0",
+                    minWidth: "200px",
+                    paddingTop: "56.25%", // 16:9
+                  }}
+                />
+                <CardContent>
+                  <Typography variant="body2" component="p">
+                    First Kommand Cyklone Mixer <br />
+                    (Truck application, not website)
+                  </Typography>
+                </CardContent>
+              </Card>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
-              <Card>Realtime To-Do??</Card>
+              <Card style={{ height: "100%" }}>
+                <CardMedia
+                  image={rttdImg}
+                  title="Realtime To-Do"
+                  style={{
+                    height: 0,
+                    backgroundPosition: "center 0",
+                    minWidth: "200px",
+                    paddingTop: "56.25%", // 16:9
+                  }}
+                />
+                <CardContent>
+                  <Typography variant="body2" component="p">
+                    Realtime To-Do
+                  </Typography>
+                </CardContent>
+              </Card>
             </Grid>
           </Grid>
         </section>
@@ -324,25 +389,34 @@ function App() {
             alignItems="center"
             spacing={3}
           >
-            <Grid item xs={8} md={6} lg={8}>
+            <Grid item xs={12}>
               <Card>
-                <CardContent>There's my resume >>></CardContent>
+                <CardContent>
+                  <Typography variant="h5" gutterBottom>
+                    If you prefer a traditional resume, you can download a copy
+                    <br />
+                    <br />
+                  </Typography>
+                  <a href={resumeDoc}>
+                    <Button
+                      variant="outlined"
+                      size="large"
+                      style={{
+                        border: "3px solid",
+                        borderRadius: "0px",
+                        borderColor: "lightgrey",
+                      }}
+                      aria-label="Download my resume"
+                    >
+                      View my resume
+                    </Button>
+                  </a>
+                </CardContent>
               </Card>
-            </Grid>
-            <Grid item xs={4} md={6} lg={4}>
-              <div>
-                <a
-                  href="./docs/ML_070820_resume.pdf"
-                  width="100%"
-                  height="100%"
-                >
-                  Click here to view
-                </a>
-              </div>
             </Grid>
           </Grid>
         </section>
-        <section id="contact" style={{ height: "20vh" }}>
+        <section id="contact">
           <Typography variant="h6" color="inherit">
             Let's talk!
           </Typography>
