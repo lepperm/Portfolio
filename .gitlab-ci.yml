@@ -9,24 +9,44 @@ variables:
 # Cache node modules - speeds up future builds
 cache:
   paths:
-  - node_modules
+    - node_modules/
+
+before_script:
+  - echo "Runs before script - move npm install here if build successful"
 
 # Name the stages involved in the pipeline
 stages:
-- deploy
+  - test
+  - deploy
+
+test:
+  stage: test
+  script:
+    - echo "Installing dependencies"
+    - npm install # Install all dependencies
+    - echo "Beginning testing"
+    - npm test
+    - echo "Testing complete"
+  only:
+    - master
+    - dev
 
 # Job name for gitlab to recognise this results in assets for Gitlab Pages
 # https://docs.gitlab.com/ee/user/project/pages/introduction.html#gitlab-pages-requirements
 pages:
   stage: deploy
   script:
+    - echo "Beginning deployment"
+    - echo "Installing dependencies"
     - npm install # Install all dependencies
+    - echo "Building for production"
     - npm run build # Build for production
-    - cp public/index.html public/404.html # Not necessary, but helps with https://medium.com/@pshrmn/demystifying-single-page-applications-3068d0555d46
-    - mv public _public # CRA and gitlab pages both use the public folder. Only do this in a build pipeline.
+    - echo "Build ready. Moving build to public"
+    - rm -rf public # Remove the existing public folder
     - mv build public # Move build files to public dir for Gitlab Pages
+    - echo "Build moved to public"
   artifacts:
     paths:
-    - public # The built files for Gitlab Pages to serve
+      - public # The built files for Gitlab Pages to serve
   only:
     - master # Only run on master branch
