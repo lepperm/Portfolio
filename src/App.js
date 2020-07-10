@@ -6,11 +6,11 @@ import {
   CardHeader,
   CardContent,
   CardMedia,
+  CardActionArea,
   Button,
   SvgIcon,
   Chip,
   Tooltip,
-  Link,
   List,
   ListItem,
   ListItemText,
@@ -113,11 +113,11 @@ function App() {
             spacing={3}
           >
             <Grid item xs={12} md={9}>
-              <Card>
+              <Card elevation={4}>
                 <CardContent>
                   <Typography color="inherit" align="left">
-                    My background is actually in engineering, where I am
-                    currently developing{" "}
+                    My background is in engineering, where I am currently
+                    developing{" "}
                     <Tooltip
                       title="Utilizing PLCs, sensors, and operator input devices to automate operations, increase operator safety, and generate rich data on industrial vehicles."
                       placement="bottom"
@@ -129,20 +129,18 @@ function App() {
                     </Tooltip>
                     applications using IEC 611131-3 PLC languages for the
                     industrial market and managing development projects. In
-                    these applications, developing intuitive and responsive
-                    operator interfaces is one of my key focuses.
+                    these applications, my key focus is developing intuitive and
+                    responsive operator interfaces.
                     <br />
                     <br />
-                    In a similar vein, I am fascinated with the current
-                    capabilities of the web when it comes to conveying
-                    information to users. I have been actively developing my
-                    front-end skills in the evenings, with a keen interest in
-                    specializing in data visualization (ask me about my
-                    spreadsheets!).
+                    In a similar vein, I am fascinated with the web's current
+                    capability and potential for conveying information to users.
+                    I am actively developing my front-end skills in the
+                    evenings, with a keen interest in data visualization (ask me
+                    about my spreadsheets!).
                     <br />
                     <br /> When not programming, I enjoy developing my animation
-                    and bartending skills, and my wife and I are avid
-                    adventurers.
+                    and bartending skills, and going on adventures with my wife.
                   </Typography>
                 </CardContent>
               </Card>
@@ -191,13 +189,13 @@ function App() {
                 <Chip
                   variant="outlined"
                   size="small"
-                  label="Agile PM"
+                  label="Agile Project Management"
                   onClick={null}
                 />
                 <Chip
                   variant="outlined"
                   size="small"
-                  label="NPM"
+                  label="npm"
                   onClick={null}
                 />
                 <Chip
@@ -242,75 +240,69 @@ function App() {
             }}
           >
             <Grid item xs={12} md={6} lg={4}>
-              <Card style={{ height: "100%" }}>
-                <CardMedia
-                  image={agwsuImg}
-                  title="Adventurer's Guild Wright State University"
-                  style={{
-                    height: 0,
-                    backgroundPosition: "center 0",
-                    minWidth: "200px",
-                    paddingTop: "56.25%", // 16:9
-                  }}
-                />
-                <CardContent>
-                  <Typography variant="h6">
-                    <Link href="https://www.agwsu.org/" color="inherit">
-                      Adventurer's Guild Wright State University
-                    </Link>
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <Card style={{ height: "100%" }}>
-                <CardMedia
-                  image={firstKommandImg}
-                  title="First Kommand Cyklone Mixer"
-                  style={{
-                    height: 0,
-                    backgroundPosition: "center 0",
-                    minWidth: "200px",
-                    paddingTop: "56.25%", // 16:9
-                  }}
-                />
-                <CardContent>
-                  <Tooltip
-                    title="I was not involved in the website development, but rather the software controlling the system on these cement trucks. There are currently over 800 units in the field, and the system is capabile of over 12 million unique configurations."
-                    placement="bottom"
-                    arrow
-                  >
+              <CardActionArea href="https://www.agwsu.org/">
+                <Card href="https://www.agwsu.org/" style={{ height: "100%" }}>
+                  <CardMedia
+                    image={agwsuImg}
+                    title="Wright State University Adventurers' Guild"
+                    style={{
+                      height: 0,
+                      backgroundPosition: "center 0",
+                      minWidth: "200px",
+                      paddingTop: "56.25%", // 16:9
+                    }}
+                  />
+                  <CardContent>
                     <Typography variant="h6">
-                      First Kommand Cyklone Mixer
+                      Wright State University Adventurers' Guild
                     </Typography>
-                  </Tooltip>
-                  <br />
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </CardActionArea>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
-              <Card style={{ height: "100%" }}>
-                <CardMedia
-                  image={rttdImg}
-                  title="Realtime To-Do"
-                  style={{
-                    height: 0,
-                    backgroundPosition: "center 0",
-                    minWidth: "200px",
-                    paddingTop: "56.25%", // 16:9
-                  }}
-                />
-                <CardContent>
-                  <Typography variant="h6">
-                    <Link
-                      href="https://realtime-to-do-225fa.web.app/"
-                      color="inherit"
-                    >
-                      Realtime To-Do
-                    </Link>
-                  </Typography>
-                </CardContent>
-              </Card>
+              <Tooltip
+                title="I was not involved in the website development, but rather the software controlling the system on these cement trucks. There are currently over 800 units in the field, and the system is capabile of over 12 million unique configurations."
+                placement="bottom"
+                arrow
+              >
+                <Card style={{ height: "100%" }}>
+                  <CardMedia
+                    image={firstKommandImg}
+                    title="First Kommand CyKlone Mixer"
+                    style={{
+                      height: 0,
+                      backgroundPosition: "center 0",
+                      minWidth: "200px",
+                      paddingTop: "56.25%", // 16:9
+                    }}
+                  />
+                  <CardContent>
+                    <Typography variant="h6">
+                      First Kommand Cyklone Mixer <br />
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Tooltip>
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <CardActionArea href="https://realtime-to-do-225fa.web.app/">
+                <Card style={{ height: "100%" }}>
+                  <CardMedia
+                    image={rttdImg}
+                    title="Realtime To-Do"
+                    style={{
+                      height: 0,
+                      backgroundPosition: "center 0",
+                      minWidth: "200px",
+                      paddingTop: "56.25%", // 16:9
+                    }}
+                  />
+                  <CardContent>
+                    <Typography variant="h6">Realtime To-Do</Typography>
+                  </CardContent>
+                </Card>
+              </CardActionArea>
             </Grid>
           </Grid>
         </section>
@@ -322,7 +314,7 @@ function App() {
             spacing={3}
           >
             <Grid item xs={12} md={6}>
-              <Card style={{ height: "100%" }}>
+              <Card elevation={4} style={{ height: "100%" }}>
                 <CardHeader title="Awards and Competitions" />
                 <CardContent>
                   <List>
@@ -375,7 +367,7 @@ function App() {
               </Card>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Card style={{ height: "100%" }}>
+              <Card elevation={4} style={{ height: "100%" }}>
                 <CardHeader title="Certifications and Education" />
                 <CardContent>
                   <List>
@@ -427,7 +419,7 @@ function App() {
             spacing={3}
           >
             <Grid item xs={12}>
-              <Card>
+              <Card elevation={4}>
                 <CardContent>
                   <Typography variant="h5" gutterBottom>
                     If you prefer a traditional resume, you can find mine here.
@@ -450,7 +442,8 @@ function App() {
                     </Button>
                   </div>
                   <Typography variant="h6">
-                    <br />I also have references and a full CV upon request.
+                    <br />I have references and a full CV available upon
+                    request.
                   </Typography>
                 </CardContent>
               </Card>
