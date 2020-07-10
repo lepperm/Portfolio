@@ -12,11 +12,12 @@ cache:
     - node_modules/
 
 before_script:
-  - echo "Runs before script - move npm install here if build successful"
+  - echo "Installing dependencies"
+  - npm install # Install all dependencies
 
 # Name the stages involved in the pipeline
 stages:
-  - test
+  #- test
   - deploy
 
 test:
