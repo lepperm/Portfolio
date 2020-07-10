@@ -1,6 +1,20 @@
 # Using the node alpine image to build the React app
 image: node:alpine
 
+# Announce the URL as per CRA docs
+# https://create-react-app.dev/docs/advanced-configuration/
+variables:
+  PUBLIC_URL: /portfolio
+
+# Cache node modules - speeds up future builds
+cache:
+  paths:
+    - node_modules/
+
+before_script:
+  - echo "Installing dependencies"
+  - npm install # Install all dependencies
+
 # Name the stages involved in the pipeline
 stages:
   - deploy
@@ -10,9 +24,6 @@ stages:
 pages:
   stage: deploy
   script:
-    - echo "Beginning deployment"
-    - echo "Installing dependencies"
-    - npm install # Install all dependencies
     - echo "Building for production"
     - npm run build # Build for production
     - echo "Build ready. Moving build to public"
