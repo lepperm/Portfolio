@@ -1,11 +1,6 @@
 # Using the node alpine image to build the React app
 image: node:alpine
 
-# Announce the URL as per CRA docs
-# https://create-react-app.dev/docs/advanced-configuration/
-variables:
-  PUBLIC_URL: /portfolio
-
 # Name the stages involved in the pipeline
 stages:
   - deploy
