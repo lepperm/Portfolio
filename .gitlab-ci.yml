@@ -17,20 +17,7 @@ before_script:
 
 # Name the stages involved in the pipeline
 stages:
-  #- test
   - deploy
-
-test:
-  stage: test
-  script:
-    - echo "Installing dependencies"
-    - npm install # Install all dependencies
-    - echo "Beginning testing"
-    - npm test
-    - echo "Testing complete"
-  only:
-    - master
-    - dev
 
 # Job name for gitlab to recognise this results in assets for Gitlab Pages
 # https://docs.gitlab.com/ee/user/project/pages/introduction.html#gitlab-pages-requirements
