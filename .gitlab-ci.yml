@@ -6,15 +6,6 @@ image: node:alpine
 variables:
   PUBLIC_URL: /portfolio
 
-# Cache node modules - speeds up future builds
-cache:
-  paths:
-    - node_modules/
-
-before_script:
-  - echo "Installing dependencies"
-  - npm install # Install all dependencies
-
 # Name the stages involved in the pipeline
 stages:
   - deploy
