@@ -1,4 +1,9 @@
 import React from "react";
+
+// COMPONENTS
+import HeadElem from "./Components/HeadElem/HeadElem";
+
+// MATERIAL-UI
 import {
   Typography,
   Grid,
@@ -28,24 +33,30 @@ import CardMembershipIcon from "@material-ui/icons/CardMembership";
 import ExploreIcon from "@material-ui/icons/Explore";
 import { ReactComponent as GitLabIcon } from "./images/icons/gitlab_icon.svg";
 
+// ANIMATION AND SPECIAL EFFECTS
 import { motion } from "framer-motion";
 import TextLoop from "react-text-loop";
 import ReactParticles from "react-particles-js";
 import particlesConfig from "./particles-config.js";
 
+// SVGS
 import { ReactComponent as ArrowPrimary } from "./ui/arrow_primary.svg";
 
+// DOCUMENTS
 import resumeDoc from "./docs/ML_070820_resume.pdf";
 
+// IMAGES
 import agwsuImg from "./images/photos/agwsu.png";
 import firstKommandImg from "./images/photos/FirstKommand.png";
 import rttdImg from "./images/photos/RealtimeTo-Do.png";
 
+// STYLE
 import "./App.css";
 
 function App() {
   return (
     <div className="App" style={{ height: "100vh", overflow: "hidden" }}>
+      <HeadElem />
       <div className="AppContent">
         <section href="landing" style={{ height: "100vh", padding: "0 1em" }}>
           <div
@@ -69,10 +80,18 @@ function App() {
                 top: 0,
               }}
             />
-            <Typography variant="h3" color="inherit">
+            <Typography
+              variant="h1"
+              color="inherit"
+              style={{ "font-size": "3em" }}
+            >
               Hi, I'm Max!
             </Typography>
-            <Typography variant="h4" color="inherit">
+            <Typography
+              variant="h2"
+              color="inherit"
+              style={{ "font-size": "2.125em" }}
+            >
               I am an aspiring front-end developer.
             </Typography>
             <div>
@@ -89,6 +108,7 @@ function App() {
                   borderRadius: "0px",
                   borderColor: "lightgrey",
                 }}
+                aria-label="Scroll to the About section"
               >
                 See my work
               </Button>
@@ -101,7 +121,7 @@ function App() {
             transition={{ ease: "easeInOut", loop: Infinity, duration: 2 }}
             style={{ position: "relative", bottom: "2em" }}
           >
-            <ArrowPrimary style={{ width: "5vw" }} />
+            <ArrowPrimary style={{ width: "5vw" }} aria-hidden="true" />
           </motion.div>
         </section>
         <section id="about">
@@ -115,6 +135,15 @@ function App() {
             <Grid item xs={12} md={9}>
               <Card elevation={4}>
                 <CardContent>
+                  <Typography color="inherit" align="left">
+                    I am actively learning and developing with the intent of
+                    becoming a front-end developer, and have filled my evenings
+                    and weekends since the onset of the 2020 COVID-19 global
+                    outbreak with web development utilizing a
+                    React/Redux/Firebase stack.
+                  </Typography>
+
+                  <br />
                   <Typography color="inherit" align="left">
                     My background is in engineering, where I am currently
                     developing{" "}
@@ -135,9 +164,20 @@ function App() {
                     <br />
                     In a similar vein, I am fascinated with the web's current
                     capability and potential for conveying information to users.
-                    I am actively developing my front-end skills in the
-                    evenings, with a keen interest in data visualization (ask me
-                    about my spreadsheets!).
+                    Striving to make the web more accessible is a major
+                    component of usability that I am interested to learn and
+                    better implement. I am also keenly interested in pursuing
+                    rich&nbsp;
+                    <Tooltip
+                      title="Ask me
+                      about my spreadsheets!"
+                      placement="bottom"
+                      arrow
+                    >
+                      <span style={{ color: "darkblue" }}>
+                        data visualization!
+                      </span>
+                    </Tooltip>
                     <br />
                     <br /> When not programming, I enjoy developing my animation
                     and bartending skills, and going on adventures with my wife.
@@ -146,7 +186,11 @@ function App() {
               </Card>
             </Grid>
             <Grid item xs={12} md={3}>
-              <Typography variant="h5" gutterBottom>
+              <Typography
+                variant="h3"
+                gutterBottom
+                style={{ "font-size": "1.5em" }}
+              >
                 Skills & Experience
               </Typography>
               <Grid container justify="space-around" alignItems="center">
@@ -160,12 +204,6 @@ function App() {
                   variant="outlined"
                   size="small"
                   label="ReactJS"
-                  onClick={null}
-                />
-                <Chip
-                  variant="outlined"
-                  size="small"
-                  label="HTML/CSS"
                   onClick={null}
                 />
                 <Chip
@@ -201,12 +239,6 @@ function App() {
                 <Chip
                   variant="outlined"
                   size="small"
-                  label="IEC 61131-3"
-                  onClick={null}
-                />
-                <Chip
-                  variant="outlined"
-                  size="small"
                   label="Excel"
                   onClick={null}
                 />
@@ -227,7 +259,11 @@ function App() {
           </Grid>
         </section>
         <section id="projects">
-          <Typography variant="h4" gutterBottom>
+          <Typography
+            variant="h3"
+            gutterBottom
+            style={{ "font-size": "2.125em" }}
+          >
             Projects
           </Typography>
           <Grid
@@ -253,7 +289,7 @@ function App() {
                     }}
                   />
                   <CardContent>
-                    <Typography variant="h6">
+                    <Typography variant="h4" style={{ "font-size": "1.25em" }}>
                       Wright State University Adventurers' Guild
                     </Typography>
                   </CardContent>
@@ -278,7 +314,7 @@ function App() {
                     }}
                   />
                   <CardContent>
-                    <Typography variant="h6">
+                    <Typography variant="h4" style={{ "font-size": "1.25em" }}>
                       First Kommand Cyklone Mixer <br />
                     </Typography>
                   </CardContent>
@@ -299,7 +335,9 @@ function App() {
                     }}
                   />
                   <CardContent>
-                    <Typography variant="h6">Realtime To-Do</Typography>
+                    <Typography variant="h4" style={{ "font-size": "1.25em" }}>
+                      Realtime To-Do
+                    </Typography>
                   </CardContent>
                 </Card>
               </CardActionArea>
@@ -421,7 +459,11 @@ function App() {
             <Grid item xs={12}>
               <Card elevation={4}>
                 <CardContent>
-                  <Typography variant="h5" gutterBottom>
+                  <Typography
+                    variant="h3"
+                    gutterBottom
+                    style={{ "font-size": "1.5em" }}
+                  >
                     If you prefer a traditional resume, you can find mine here.
                     <br />
                     <br />
@@ -441,7 +483,7 @@ function App() {
                       View my resume
                     </Button>
                   </div>
-                  <Typography variant="h6">
+                  <Typography variant="h4" style={{ "font-size": "1.25em" }}>
                     <br />I have references and a full CV available upon
                     request.
                   </Typography>
@@ -451,7 +493,11 @@ function App() {
           </Grid>
         </section>
         <section id="contact">
-          <Typography variant="h5" color="inherit">
+          <Typography
+            variant="h2"
+            color="inherit"
+            style={{ "font-size": "1.5em" }}
+          >
             Let's talk!
             <br />
             <br />
@@ -503,7 +549,7 @@ function App() {
           <span>Made with </span>
           <TextLoop mask={true}>
             <span role="img" aria-label="heart">
-              ❤️
+              📚
             </span>
             <span role="img" aria-label="music">
               🎶
@@ -512,7 +558,7 @@ function App() {
               ☕
             </span>
             <span role="img" aria-label="lots of reading">
-              📚
+              ❤️
             </span>
           </TextLoop>
           <span> by Max Lepper, 2020</span>
