@@ -1,7 +1,7 @@
 import React from "react";
 
 // COMPONENTS
-import HeadElem from "./Components/HeadElem/HeadElem";
+//import HeadElem from "./Components/HeadElem/HeadElem";
 
 // MATERIAL-UI
 import {
@@ -56,7 +56,6 @@ import "./App.css";
 function App() {
   return (
     <div className="App" style={{ height: "100vh", overflow: "hidden" }}>
-      <HeadElem />
       <div className="AppContent">
         <section href="landing" style={{ height: "100vh", padding: "0 1em" }}>
           <div
@@ -83,14 +82,14 @@ function App() {
             <Typography
               variant="h1"
               color="inherit"
-              style={{ "font-size": "3em" }}
+              style={{ fontSize: "3em" }}
             >
               Hi, I'm Max!
             </Typography>
             <Typography
               variant="h2"
               color="inherit"
-              style={{ "font-size": "2.125em" }}
+              style={{ fontSize: "2.125em" }}
             >
               I am an aspiring front-end developer.
             </Typography>
@@ -189,7 +188,7 @@ function App() {
               <Typography
                 variant="h3"
                 gutterBottom
-                style={{ "font-size": "1.5em" }}
+                style={{ fontSize: "1.5em" }}
               >
                 Skills & Experience
               </Typography>
@@ -259,11 +258,7 @@ function App() {
           </Grid>
         </section>
         <section id="projects">
-          <Typography
-            variant="h3"
-            gutterBottom
-            style={{ "font-size": "2.125em" }}
-          >
+          <Typography variant="h3" gutterBottom style={{ fontSize: "2.125em" }}>
             Projects
           </Typography>
           <Grid
@@ -289,7 +284,7 @@ function App() {
                     }}
                   />
                   <CardContent>
-                    <Typography variant="h4" style={{ "font-size": "1.25em" }}>
+                    <Typography variant="h4" style={{ fontSize: "1.25em" }}>
                       Wright State University Adventurers' Guild
                     </Typography>
                   </CardContent>
@@ -314,7 +309,7 @@ function App() {
                     }}
                   />
                   <CardContent>
-                    <Typography variant="h4" style={{ "font-size": "1.25em" }}>
+                    <Typography variant="h4" style={{ fontSize: "1.25em" }}>
                       First Kommand Cyklone Mixer <br />
                     </Typography>
                   </CardContent>
@@ -335,7 +330,7 @@ function App() {
                     }}
                   />
                   <CardContent>
-                    <Typography variant="h4" style={{ "font-size": "1.25em" }}>
+                    <Typography variant="h4" style={{ fontSize: "1.25em" }}>
                       Realtime To-Do
                     </Typography>
                   </CardContent>
@@ -462,7 +457,7 @@ function App() {
                   <Typography
                     variant="h3"
                     gutterBottom
-                    style={{ "font-size": "1.5em" }}
+                    style={{ fontSize: "1.5em" }}
                   >
                     If you prefer a traditional resume, you can find mine here.
                     <br />
@@ -483,7 +478,7 @@ function App() {
                       View my resume
                     </Button>
                   </div>
-                  <Typography variant="h4" style={{ "font-size": "1.25em" }}>
+                  <Typography variant="h4" style={{ fontSize: "1.25em" }}>
                     <br />I have references and a full CV available upon
                     request.
                   </Typography>
@@ -496,7 +491,7 @@ function App() {
           <Typography
             variant="h2"
             color="inherit"
-            style={{ "font-size": "1.5em" }}
+            style={{ fontSize: "1.5em" }}
           >
             Let's talk!
             <br />

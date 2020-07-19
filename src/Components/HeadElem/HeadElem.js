@@ -2,6 +2,7 @@
  * @fileoverview React Component for HEAD element for Google Analytics and SEO
  */
 
+/* Upon further learning, I have realized that this will not be very helpful unless I implement server-side rendering. Preserving component while deciding what to do. */
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 
