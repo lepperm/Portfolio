@@ -45,6 +45,7 @@ quality:lint:
     - echo "Linting to be performed here eventually"
   dependencies:
     - install
+  allow_failure: true
 
 quality:jest:
   stage: quality
@@ -59,9 +60,7 @@ quality:jest:
     - install
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   # Extracts the final overall coverage percentage. Also configured in gitlab for history
-  only:
-    - master
-    - dev
+  allow_failure: true
 
 # Job name for gitlab to recognise this results in assets for Gitlab Pages
 # https://docs.gitlab.com/ee/user/project/pages/introduction.html#gitlab-pages-requirements
@@ -94,3 +93,4 @@ pages:
   when: manual
   only:
     - master
+    - dev
