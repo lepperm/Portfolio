@@ -1,16 +1,17 @@
-# Using the node alpine image to build the React app
-image: node:latest
+# Using local node image to build the React app
+image: node:12.18.0
 
 # Announce the URL as per CRA docs
 # https://create-react-app.dev/docs/advanced-configuration/
 variables:
   PUBLIC_URL: /portfolio
+  FULL_URL: "https://maxlepper.gitlab.io/portfolio/"
 
 # Name the stages involved in the pipeline
 stages:
   - install
   - build
-  - test
+  - quality
   - deploy
   - audit
 
@@ -38,8 +39,15 @@ build:
   dependencies:
     - install # Passes in artifacts from "install" stage
 
-test:
-  stage: test
+quality:lint:
+  stage: quality
+  script:
+    - echo "Linting to be performed here eventually"
+  dependencies:
+    - install
+
+quality:jest:
+  stage: quality
   script:
     - echo "Running tests"
     # CI=true will tell Jest to not run in watch mode
@@ -48,7 +56,7 @@ test:
     # --watchAll=false should force tests to run once, if CI=true doesn't
     - CI=true npm test -- --env=jsdom --coverage --watchAll=false
   dependencies:
-    - install # Passes in artifacts from "install" stage
+    - install
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   # Extracts the final overall coverage percentage. Also configured in gitlab for history
   only:
@@ -69,7 +77,7 @@ pages:
     paths:
       - public # The built files for Gitlab Pages to serve
   only:
-    - master # Only run on master branch
+    - master
 
 # Conduct lighthouse audit
 .lighthouse:
@@ -78,7 +86,7 @@ pages:
   before_script:
     - npm i -g lighthouse
   script:
-    - lighthouse --chrome-flags="--headless --no-sandbox" $LIGHTHOUSE_TEST_URL --output html --output-path ./report.html
+    - lighthouse --chrome-flags="--headless --no-sandbox" $FULL_URL --output html --output-path ./report.html
   artifacts:
     paths:
       - ./report.html
