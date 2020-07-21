@@ -45,6 +45,7 @@ quality:lint:
     - echo "Linting to be performed here eventually"
   dependencies:
     - install
+  needs: ["install"] # Allows linting to begin running as soon as dependencies are installed
   allow_failure: true
 
 quality:jest:
@@ -58,6 +59,7 @@ quality:jest:
     - CI=true npm test -- --env=jsdom --coverage --watchAll=false
   dependencies:
     - install
+  needs: ["install"] # Allows testing to begin running as soon as dependencies are installed
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   # Extracts the final overall coverage percentage. Also configured in gitlab for history
   allow_failure: true
@@ -78,8 +80,8 @@ pages:
   only:
     - master
 
-# Conduct lighthouse audit
-.lighthouse:
+# Manually conduct lighthouse audit
+lighthouse:
   image: markhobson/node-chrome
   stage: audit
   before_script:
@@ -91,6 +93,3 @@ pages:
       - ./report.html
     expire_in: 1 week
   when: manual
-  only:
-    - master
-    - dev
