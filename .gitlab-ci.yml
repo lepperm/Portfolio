@@ -1,35 +1,67 @@
 # Using the node alpine image to build the React app
-image: node:alpine
+image: node:latest
 
 # Announce the URL as per CRA docs
 # https://create-react-app.dev/docs/advanced-configuration/
 variables:
   PUBLIC_URL: /portfolio
 
-# Cache node modules - speeds up future builds
-cache:
-  paths:
-    - node_modules/
-
-before_script:
-  - echo "Installing dependencies"
-  - npm install # Install all dependencies
-
 # Name the stages involved in the pipeline
 stages:
+  - install
+  - build
+  - test
   - deploy
+
+install:
+  stage: install
+  script:
+    - echo "Installing dependencies"
+    - npm install # Install all dependencies
+  artifacts:
+    name: "artifacts"
+    untracked: true
+    expire_in: 60 mins
+    paths:
+      - .npm/
+      - node_modules/
+
+build:
+  stage: build
+  script:
+    - echo "Building"
+    - CI=false npm run build #  CI=false will allow our build to complete with warnings
+  artifacts:
+    paths:
+      - build
+    expire_in: 60 mins
+  dependencies:
+    - install # Passes in artifacts from "install" stage
+
+test:
+  stage: test
+  script:
+    - echo "Running tests"
+    # CI=true will tell Jest to not run in watch mode
+    # --env=jsdom provides a mock browser environment for testing
+    # --coverage generates a human-readable summary of testing
+    # --watchAll=false should force tests to run once, if CI=true doesn't
+    - CI=true npm test -- --env=jsdom --coverage --watchAll=false
+  dependencies:
+    - install # Passes in artifacts from "install" stage
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  # Extracts the final overall coverage percentage. Also configured in gitlab for history
 
 # Job name for gitlab to recognise this results in assets for Gitlab Pages
 # https://docs.gitlab.com/ee/user/project/pages/introduction.html#gitlab-pages-requirements
 pages:
   stage: deploy
   script:
-    - echo "Building for production"
-    - npm run build # Build for production
-    - echo "Build ready. Moving build to public"
+    - echo "Deploying Build to Public"
     - rm -rf public # Remove the existing public folder
     - mv build public # Move build files to public dir for Gitlab Pages
-    - echo "Build moved to public"
+  after_script:
+    - echo "Deployment successful, great work!"
   artifacts:
     paths:
       - public # The built files for Gitlab Pages to serve

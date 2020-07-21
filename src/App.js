@@ -46,9 +46,9 @@ import { ReactComponent as ArrowPrimary } from "./ui/arrow_primary.svg";
 import resumeDoc from "./docs/ML_070820_resume.pdf";
 
 // IMAGES
-import agwsuImg from "./images/photos/agwsu.png";
-import firstKommandImg from "./images/photos/FirstKommand.png";
-import rttdImg from "./images/photos/RealtimeTo-Do.png";
+import agwsuImg from "./images/photos/agwsu.webp";
+import firstKommandImg from "./images/photos/FirstKommand.webp";
+import rttdImg from "./images/photos/RealtimeTo-Do.webp";
 
 // STYLE
 import "./App.css";
