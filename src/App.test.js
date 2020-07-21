@@ -1,9 +1,13 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+/**
+ * @fileoverview Tests for App.js
+ */
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+import React from "react";
+import { render } from "enzyme";
+
+import App from "./App";
+
+it("should render the App", () => {
+  const component = render(<App />);
+  expect(component).toMatchSnapshot();
 });

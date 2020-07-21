@@ -12,6 +12,7 @@ stages:
   - build
   - test
   - deploy
+  - audit
 
 install:
   stage: install
@@ -23,7 +24,6 @@ install:
     untracked: true
     expire_in: 60 mins
     paths:
-      - .npm/
       - node_modules/
 
 build:
@@ -51,6 +51,9 @@ test:
     - install # Passes in artifacts from "install" stage
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   # Extracts the final overall coverage percentage. Also configured in gitlab for history
+  only:
+    - master
+    - dev
 
 # Job name for gitlab to recognise this results in assets for Gitlab Pages
 # https://docs.gitlab.com/ee/user/project/pages/introduction.html#gitlab-pages-requirements
@@ -67,3 +70,19 @@ pages:
       - public # The built files for Gitlab Pages to serve
   only:
     - master # Only run on master branch
+
+# Conduct lighthouse audit
+.lighthouse:
+  image: markhobson/node-chrome
+  stage: audit
+  before_script:
+    - npm i -g lighthouse
+  script:
+    - lighthouse --chrome-flags="--headless --no-sandbox" $LIGHTHOUSE_TEST_URL --output html --output-path ./report.html
+  artifacts:
+    paths:
+      - ./report.html
+    expire_in: 1 week
+  when: manual
+  only:
+    - master
