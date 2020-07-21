@@ -12,6 +12,7 @@ stages:
   - install
   - build
   - quality
+  - optimize
   - deploy
   - audit
 
@@ -63,6 +64,21 @@ quality:jest:
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   # Extracts the final overall coverage percentage. Also configured in gitlab for history
   allow_failure: true
+
+optimize:
+  stage: optimize
+  script:
+    - echo "Zipping up files pre-deployment"
+    - gzip -k -6 $(find build -type f)
+  artifacts:
+    paths:
+      - build
+    expire_in: 60 mins
+  dependencies:
+    - build
+  needs: ["build"] # Allows optimizing to begin running as soon as the build is complete
+  only:
+    - master
 
 # Job name for gitlab to recognise this results in assets for Gitlab Pages
 # https://docs.gitlab.com/ee/user/project/pages/introduction.html#gitlab-pages-requirements
