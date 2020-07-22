@@ -127,6 +127,7 @@ lighthouse:prelim:
   needs: ["deploy:pages"]
   only:
     - dev
+  allow_failure: true
 
 # Conduct lighthouse audit on production
 lighthouse:production:
@@ -143,3 +144,4 @@ lighthouse:production:
   needs: ["deploy:firebase"]
   only:
     - master
+  allow_failure: true
