@@ -78,13 +78,15 @@ deploy:pages:
   script:
     - echo "Deploying Build to Preliminary (Pages)"
     - rm -rf public # Remove the existing public folder
-    - mv build public # Move build files to public dir for Gitlab Pages
+    - cp build public # Copy build files to public dir for Gitlab Pages
   after_script:
     - echo "Deployment successful, great work!"
   artifacts:
     paths:
       - public # The built files for Gitlab Pages to serve
     expire_in: 60 mins
+  dependencies:
+    - optimize
   only:
     - master
     - dev
@@ -93,20 +95,19 @@ deploy:pages:
 deploy:firebase:
   stage: deploy
   before_script:
-    - echo "Prepping build for public deployment"
-    - rm -rf public # Remove the existing public folder
-    - mv build public # Move build files to public dir for Gitlab Pages
     - npm install -g firebase-tools
   script:
-    - (if [ -d "public" ]; then echo ok; else exit "No build folder found, try running pipeline again"; fi);
+    - (if [ -d "build" ]; then echo ok; else exit "No build folder found, try running pipeline again"; fi);
     - echo "Deploying build to Firebase"
     - firebase deploy -m "Pipeline $CI_PIPELINE_ID, commit $CI_COMMIT_TAG" --non-interactive --token $FIREBASE_DEPLOY_KEY
   after_script:
     - echo "Deployment successful, great work!"
   artifacts:
     paths:
-      - public # The built files for Gitlab Pages to serve
+      - build
     expire_in: 60 mins
+  dependencies:
+    - optimize
   when: manual
   only:
     - master
