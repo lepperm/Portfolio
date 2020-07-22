@@ -78,9 +78,7 @@ deploy:pages:
   script:
     - echo "Deploying Build to Preliminary (Pages)"
     - rm -rf public # Remove the existing public folder
-    - cp build public # Copy build files to public dir for Gitlab Pages
-  after_script:
-    - echo "Deployment successful, great work!"
+    - cp -r build public # Copy build files to public dir for Gitlab Pages
   artifacts:
     paths:
       - public # The built files for Gitlab Pages to serve
@@ -100,8 +98,6 @@ deploy:firebase:
     - (if [ -d "build" ]; then echo ok; else exit "No build folder found, try running pipeline again"; fi);
     - echo "Deploying build to Firebase"
     - firebase deploy -m "Pipeline $CI_PIPELINE_ID, commit $CI_COMMIT_TAG" --non-interactive --token $FIREBASE_DEPLOY_KEY
-  after_script:
-    - echo "Deployment successful, great work!"
   artifacts:
     paths:
       - build
