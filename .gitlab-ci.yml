@@ -112,7 +112,7 @@ deploy:firebase:
     - master
 
 # Conduct lighthouse audit on preliminary
-lighthouse:prelim:
+lighthouse:pages:
   image: markhobson/node-chrome
   stage: audit
   before_script:
@@ -123,14 +123,14 @@ lighthouse:prelim:
     paths:
       - ./report.html
     expire_in: 1 week
-  when: manual
   needs: ["deploy:pages"]
   only:
+    - master
     - dev
   allow_failure: true
 
 # Conduct lighthouse audit on production
-lighthouse:production:
+lighthouse:firebase:
   image: markhobson/node-chrome
   stage: audit
   before_script:
