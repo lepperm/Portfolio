@@ -101,6 +101,7 @@ deploy:pages:
 
 # Deploy to Firebase
 deploy:firebase:
+  stage: deploy
   before_script:
     - echo "Prepping build for public deployment"
     - rm -rf public # Remove the existing public folder
