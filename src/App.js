@@ -518,7 +518,7 @@ function App() {
             </Grid>
             <Grid item xs={4} lg={4}>
               <Tooltip title="Email" placement="bottom" arrow>
-                <a href=" mailto:maxllepper@gmail.com?subject=Portfolio%20Inquiry">
+                <a href=" mailto:incoming+maxlepper-portfolio-19634753-issue-@incoming.gitlab.com?subject=Portfolio%20Inquiry">
                   <EmailIcon
                     aria-label="Email"
                     fontSize="large"

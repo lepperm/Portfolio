@@ -5,7 +5,8 @@ image: node:12.18.0
 # https://create-react-app.dev/docs/advanced-configuration/
 variables:
   PUBLIC_URL: /portfolio
-  FULL_URL: "https://maxlepper.gitlab.io/portfolio/"
+  PRELIM_URL: "https://maxlepper.gitlab.io/portfolio/"
+  LIVE_URL: "https://maxlepper.me"
 
 # Name the stages involved in the pipeline
 stages:
@@ -69,7 +70,7 @@ optimize:
   stage: optimize
   script:
     - echo "Zipping up files pre-deployment"
-    - gzip -k -6 $(find build -type f)
+    - gzip -k -9 $(find build -type f)
   artifacts:
     paths:
       - build
@@ -79,13 +80,14 @@ optimize:
   needs: ["build"] # Allows optimizing to begin running as soon as the build is complete
   only:
     - master
+    - dev
 
 # Job name for gitlab to recognise this results in assets for Gitlab Pages
 # https://docs.gitlab.com/ee/user/project/pages/introduction.html#gitlab-pages-requirements
-pages:
+deploy:pages:
   stage: deploy
   script:
-    - echo "Deploying Build to Public"
+    - echo "Deploying Build to Preliminary (Pages)"
     - rm -rf public # Remove the existing public folder
     - mv build public # Move build files to public dir for Gitlab Pages
   after_script:
@@ -95,17 +97,55 @@ pages:
       - public # The built files for Gitlab Pages to serve
   only:
     - master
+    - dev
 
-# Manually conduct lighthouse audit
-lighthouse:
+# Deploy to Firebase
+deploy:firebase:
+  before_script:
+    - echo "Prepping build for public deployment"
+    - rm -rf public # Remove the existing public folder
+    - mv build public # Move build files to public dir for Gitlab Pages
+    - npm install -g firebase-tools
+  script:
+    - (if [ -d "public" ]; then echo ok; else exit "No build folder found, try running pipeline again"; fi);
+    - echo "Deploying build to Firebase"
+    - firebase deploy -m "Pipeline $CI_PIPELINE_ID, commit $CI_COMMIT_TAG" --non-interactive --token $FIREBASE_DEPLOY_KEY
+  after_script:
+    - echo "Deployment successful, great work!"
+  artifacts:
+    paths:
+      - public # The built files for Gitlab Pages to serve
+  when: manual
+  only:
+    - master
+
+# Conduct lighthouse audit on preliminary
+lighthouse:prelim:
   image: markhobson/node-chrome
   stage: audit
   before_script:
     - npm i -g lighthouse
   script:
-    - lighthouse --chrome-flags="--headless --no-sandbox" $FULL_URL --output html --output-path ./report.html
+    - lighthouse --chrome-flags="--headless --no-sandbox" $PRELIM_URL --output html --output-path ./report.html
   artifacts:
     paths:
       - ./report.html
     expire_in: 1 week
   when: manual
+  only:
+    - dev
+
+# Conduct lighthouse audit on production
+lighthouse:production:
+  image: markhobson/node-chrome
+  stage: audit
+  before_script:
+    - npm i -g lighthouse
+  script:
+    - lighthouse --chrome-flags="--headless --no-sandbox" $LIVE_URL --output html --output-path ./report.html
+  artifacts:
+    paths:
+      - ./report.html
+    expire_in: 1 week
+  only:
+    - master
