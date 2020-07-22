@@ -124,6 +124,7 @@ lighthouse:prelim:
       - ./report.html
     expire_in: 1 week
   when: manual
+  needs: ["deploy:pages"]
   only:
     - dev
 
@@ -139,5 +140,6 @@ lighthouse:production:
     paths:
       - ./report.html
     expire_in: 1 week
+  needs: ["deploy:firebase"]
   only:
     - master
