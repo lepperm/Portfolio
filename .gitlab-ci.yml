@@ -38,17 +38,6 @@ build:
     paths:
       - build
     expire_in: 60 mins
-  dependencies:
-    - install # Passes in artifacts from "install" stage
-
-quality:lint:
-  stage: quality
-  script:
-    - echo "Linting to be performed here eventually"
-  dependencies:
-    - install
-  needs: ["install"] # Allows linting to begin running as soon as dependencies are installed
-  allow_failure: true
 
 quality:jest:
   stage: quality
@@ -95,6 +84,7 @@ deploy:pages:
   artifacts:
     paths:
       - public # The built files for Gitlab Pages to serve
+    expire_in: 60 mins
   only:
     - master
     - dev
@@ -116,6 +106,7 @@ deploy:firebase:
   artifacts:
     paths:
       - public # The built files for Gitlab Pages to serve
+    expire_in: 60 mins
   when: manual
   only:
     - master
