@@ -82,7 +82,7 @@ deploy:pages:
     - echo "Deploying Build to Preliminary (Pages)"
     - rm -rfv public # Remove the existing public folder
     - mkdir -pv public # Create a new empty public folder
-    - cp -rpv build public # Copy build files to public dir for Gitlab Pages
+    - cp -rpv build/* public # Copy build files to public dir for Gitlab Pages
   artifacts:
     paths:
       - public # The built files for Gitlab Pages to serve
@@ -102,7 +102,7 @@ deploy:firebase:
   script:
     - echo "Deploying build to Firebase"
     - mkdir firedeploy
-    - cp -rpv build firedeploy
+    - cp -rpv build/* firedeploy
     - firebase deploy -m "Pipeline $CI_PIPELINE_ID, commit $CI_COMMIT_TAG" --non-interactive --token $FIREBASE_DEPLOY_KEY
   artifacts:
     paths:
