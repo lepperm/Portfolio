@@ -76,7 +76,7 @@ optimize:
 
 # Job name for gitlab to recognise this results in assets for Gitlab Pages
 # https://docs.gitlab.com/ee/user/project/pages/introduction.html#gitlab-pages-requirements
-deploy:pages:
+pages:
   stage: deploy
   script:
     - echo "Deploying Build to Preliminary (Pages)"
@@ -85,8 +85,8 @@ deploy:pages:
     - cp -rpv build/* public # Copy build files to public dir for Gitlab Pages
   artifacts:
     paths:
-      - public # The built files for Gitlab Pages to serve
-    expire_in: 60 mins
+      - public # The built files for Gitlab Pages to serve. MUST be "public"
+    expire_in: 120 mins
   dependencies:
     - optimize
   only:
@@ -94,7 +94,7 @@ deploy:pages:
     - dev
 
 # Deploy to Firebase
-deploy:firebase:
+firebase:
   stage: deploy
   before_script:
     - (if [ -d "build" ]; then echo "Found build folder"; else exit "No build folder found, try running pipeline again"; fi);
