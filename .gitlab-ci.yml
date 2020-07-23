@@ -126,7 +126,7 @@ lighthouse:pages:
     paths:
       - ./report.html
     expire_in: 1 week
-  needs: ["deploy:pages"]
+  needs: ["pages"]
   only:
     - master
     - dev
@@ -144,7 +144,7 @@ lighthouse:firebase:
     paths:
       - ./report.html
     expire_in: 1 week
-  needs: ["deploy:firebase"]
+  needs: ["firebase"]
   only:
     - master
   allow_failure: true
