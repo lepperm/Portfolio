@@ -14,7 +14,7 @@
     <meta
       name="keywords"
       content="Max Lepper, Max, Lepper, front-end developer, front-end, web developer, developer, computer programmer, programmer, ReactJS, React, Redux, Firestorm, Leadership, Agile, Project Management, portfolio, resume"
-    ></meta>
+    />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -31,13 +31,18 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-172983308-1"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-172983308-1"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-      gtag('config', 'UA-172983308-1');
+      gtag("config", "UA-172983308-1");
     </script>
     <noscript>
       <link rel="stylesheet" type="text/css" href="./index.css" />
@@ -55,19 +60,22 @@
             It looks like you do not currently have JavaScript enabled, which is
             the programming language that powers my site.
           </p>
-          <a href="https://enable-javascript.com/">
-            <button class="button buttonJS">
-              Help me enable JavaScript
-            </button>
-          </a>
+          <form action="https://enable-javascript.com/">
+            <input
+              class="button buttonJS"
+              type="submit"
+              value="Help me enable JavaScript"
+            />
+          </form>
           <p>
-            I would love to share my work with you!<br/><br/>Here is a link to my <a href='./docs/ML_070820_resume.pdf'>resume.</a>
+            I would love to share my work with you!<br /><br />Here is a link to
+            my <a href="./docs/ML_070820_resume.pdf">resume.</a>
           </p>
         </div>
         <div class="staggerD" style="opacity: 0;">
           If you would like to learn more about me, you can find me online at
           the following sites:
-          </br></br>&nbsp;
+          <br /><br />&nbsp;
         </div>
         <div class="siteLinks staggerD" style="opacity: 0;">
           <div>
@@ -113,7 +121,7 @@
                   />
                 </g>
               </svg>
-              </br>
+              <br />
               GitLab
             </a>
           </div>
@@ -144,7 +152,7 @@
                   </g>
                 </g>
               </svg>
-              </br>
+              <br />
               LinkedIn
             </a>
           </div>

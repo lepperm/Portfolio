@@ -8,6 +8,11 @@ variables:
   PRELIM_URL: "https://maxlepper.gitlab.io/portfolio/"
   LIVE_URL: "https://maxlepper.me"
 
+# Cache node modules - speeds up future builds
+cache:
+  paths:
+    - node_modules/
+
 # Name the stages involved in the pipeline
 stages:
   - install
@@ -48,8 +53,6 @@ quality:jest:
     # --coverage generates a human-readable summary of testing
     # --watchAll=false should force tests to run once, if CI=true doesn't
     - CI=true npm test -- --env=jsdom --coverage --watchAll=false
-  dependencies:
-    - install
   needs: ["install"] # Allows testing to begin running as soon as dependencies are installed
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   # Extracts the final overall coverage percentage. Also configured in gitlab for history
@@ -77,8 +80,9 @@ deploy:pages:
   stage: deploy
   script:
     - echo "Deploying Build to Preliminary (Pages)"
-    - rm -rf public # Remove the existing public folder
-    - cp -r build public # Copy build files to public dir for Gitlab Pages
+    - rm -rfv public # Remove the existing public folder
+    - mkdir -pv public # Create a new empty public folder
+    - cp -rpv build public # Copy build files to public dir for Gitlab Pages
   artifacts:
     paths:
       - public # The built files for Gitlab Pages to serve
@@ -93,14 +97,16 @@ deploy:pages:
 deploy:firebase:
   stage: deploy
   before_script:
+    - (if [ -d "build" ]; then echo "Found build folder"; else exit "No build folder found, try running pipeline again"; fi);
     - npm install -g firebase-tools
   script:
-    - (if [ -d "build" ]; then echo ok; else exit "No build folder found, try running pipeline again"; fi);
     - echo "Deploying build to Firebase"
+    - mkdir firedeploy
+    - cp -rpv build firedeploy
     - firebase deploy -m "Pipeline $CI_PIPELINE_ID, commit $CI_COMMIT_TAG" --non-interactive --token $FIREBASE_DEPLOY_KEY
   artifacts:
     paths:
-      - build
+      - firedeploy
     expire_in: 60 mins
   dependencies:
     - optimize

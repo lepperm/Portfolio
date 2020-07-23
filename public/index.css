@@ -85,7 +85,7 @@ h4 {
 
 .staggerA {
   opacity: 1;
-  animation: fade-in 1s linear 0.5s 1 forwards;
+  animation: fade-in 1s linear 0s 1 forwards;
 }
 
 .staggerB {
