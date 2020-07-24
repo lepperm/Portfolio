@@ -2,7 +2,6 @@
  * @fileoverview React Component for HEAD element for Google Analytics and SEO
  */
 
-/* Upon further learning, I have realized that this will not be very helpful unless I implement server-side rendering. Preserving component while deciding what to do. */
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 
@@ -20,8 +19,7 @@ class HeadElem extends Component {
           name="description"
           content="Max is a passionate aspiring front-end developer, eager to drive value to your team!"
         />
-        <link rel="canonical" href="https://maxlepper.gitlab.io/portfolio/" />
-        <meta name="author" content="Max Lepper"></meta>
+        <link rel="canonical" href="https://maxlepper.me" />
         <meta
           name="keywords"
           content="Max Lepper, Max, Lepper, front-end developer, front-end, web developer, developer, computer programmer, programmer, ReactJS, React, Redux, Firestorm, Leadership, Agile, Project Management, portfolio, resume"
@@ -35,8 +33,8 @@ class HeadElem extends Component {
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=UA-172983308-1"
-        ></script>
-        {/*Not currently sure which to use - <script async src="https://www.google-analytics.com/analytics.js" />*/}
+        />
+        <script async src="https://www.google-analytics.com/analytics.js" />
         <script>
           {`
           window.dataLayer = window.dataLayer || [];

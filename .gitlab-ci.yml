@@ -83,6 +83,7 @@ pages:
     - rm -rfv public # Remove the existing public folder
     - mkdir -pv public # Create a new empty public folder
     - cp -rpv build/* public # Copy build files to public dir for Gitlab Pages
+    - cp -pv public/index.html public/404.html
   artifacts:
     paths:
       - public # The built files for Gitlab Pages to serve. MUST be "public"
