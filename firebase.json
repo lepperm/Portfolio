@@ -1,7 +1,8 @@
 {
   "hosting": {
     "public": "firedeploy",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],,
+    "redirects": [],
     "rewrites": [
       {
         "source": "**",

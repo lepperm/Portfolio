@@ -16,8 +16,8 @@ cache:
 # Name the stages involved in the pipeline
 stages:
   - install
-  - build
   - quality
+  - build
   - optimize
   - deploy
   - audit
@@ -34,16 +34,6 @@ install:
     paths:
       - node_modules/
 
-build:
-  stage: build
-  script:
-    - echo "Building"
-    - CI=false npm run build #  CI=false will allow our build to complete with warnings
-  artifacts:
-    paths:
-      - build
-    expire_in: 60 mins
-
 quality:jest:
   stage: quality
   script:
@@ -57,6 +47,16 @@ quality:jest:
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   # Extracts the final overall coverage percentage. Also configured in gitlab for history
   allow_failure: true
+
+build:
+  stage: build
+  script:
+    - echo "Building"
+    - CI=false npm run build #  CI=false will allow our build to complete with warnings
+  artifacts:
+    paths:
+      - build
+    expire_in: 60 mins
 
 optimize:
   stage: optimize
@@ -87,7 +87,7 @@ pages:
   artifacts:
     paths:
       - public # The built files for Gitlab Pages to serve. MUST be "public"
-    expire_in: 120 mins
+    expire_in: 60 mins
   dependencies:
     - optimize
   only:

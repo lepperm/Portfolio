@@ -35,9 +35,6 @@ import { ReactComponent as GitLabIcon } from "./images/icons/gitlab_icon.svg";
 
 // ANIMATION AND SPECIAL EFFECTS
 import { motion } from "framer-motion";
-import TextLoop from "react-text-loop";
-import ReactParticles from "react-particles-js";
-import particlesConfig from "./particles-config.js";
 
 // SVGS
 import { ReactComponent as ArrowPrimary } from "./ui/arrow_primary.svg";
@@ -68,17 +65,6 @@ function App() {
               alignContent: "center",
             }}
           >
-            <ReactParticles
-              params={particlesConfig}
-              style={{
-                position: "absolute",
-                zIndex: -1,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                top: 0,
-              }}
-            />
             <Typography
               variant="h1"
               color="inherit"
@@ -542,20 +528,9 @@ function App() {
         </section>
         <section id="edited" style={{ height: "2em" }}>
           <span>Made with </span>
-          <TextLoop mask={true}>
-            <span role="img" aria-label="heart">
-              📚
-            </span>
-            <span role="img" aria-label="music">
-              🎶
-            </span>
-            <span role="img" aria-label="coffee">
-              ☕
-            </span>
-            <span role="img" aria-label="lots of reading">
-              ❤️
-            </span>
-          </TextLoop>
+          <span role="img" aria-label="lots of reading">
+            📚
+          </span>
           <span> by Max Lepper, 2020</span>
         </section>
       </div>
