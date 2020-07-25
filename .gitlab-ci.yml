@@ -71,6 +71,9 @@ build:production:
     paths:
       - build
     expire_in: 60 mins
+  needs:
+    - job: lighthouse:pages # Require staging deployment to complete before production
+      artifacts: false
   when: manual
   only:
     - master
@@ -89,6 +92,7 @@ pages:
   environment:
     name: Staging
     url: https://maxlepper.gitlab.io/portfolio
+    auto_stop_in: 1 day
   artifacts:
     paths:
       - public # The built files for Gitlab Pages to serve. MUST be "public"
@@ -114,6 +118,7 @@ firebase:
   environment:
     name: Production
     url: https://maxlepper.me
+    auto_stop_in: 1 day
   artifacts:
     paths:
       - firedeploy
