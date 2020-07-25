@@ -71,9 +71,6 @@ build:production:
     paths:
       - build
     expire_in: 60 mins
-  needs:
-    - job: lighthouse:pages # Require staging deployment to complete before production
-      artifacts: false
   when: manual
   only:
     - master
