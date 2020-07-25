@@ -1,10 +1,9 @@
 # Using local node image to build the React app
 image: node:12.18.0
 
-# Announce the URL as per CRA docs
+# Announce the URL as per CRA docs (moved to build stage)
 # https://create-react-app.dev/docs/advanced-configuration/
 variables:
-  PUBLIC_URL: /portfolio
   PRELIM_URL: "https://maxlepper.gitlab.io/portfolio/"
   LIVE_URL: "https://maxlepper.me"
 
@@ -18,7 +17,6 @@ stages:
   - install
   - quality
   - build
-  - optimize
   - deploy
   - audit
 
@@ -43,33 +41,38 @@ quality:jest:
     # --coverage generates a human-readable summary of testing
     # --watchAll=false should force tests to run once, if CI=true doesn't
     - CI=true npm test -- --env=jsdom --coverage --watchAll=false
-  needs: ["install"] # Allows testing to begin running as soon as dependencies are installed
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   # Extracts the final overall coverage percentage. Also configured in gitlab for history
   allow_failure: true
 
-build:
+build:staging:
   stage: build
   script:
     - echo "Building"
-    - CI=false npm run build #  CI=false will allow our build to complete with warnings
-  artifacts:
-    paths:
-      - build
-    expire_in: 60 mins
-
-optimize:
-  stage: optimize
-  script:
+    - CI=false PUBLIC_URL="/portfolio" npm run build #  CI=false will allow our build to complete with warnings
     - echo "Zipping up files pre-deployment"
     - gzip -k -9 $(find build -type f)
   artifacts:
     paths:
       - build
     expire_in: 60 mins
-  dependencies:
-    - build
-  needs: ["build"] # Allows optimizing to begin running as soon as the build is complete
+  when: manual
+  only:
+    - master
+    - dev
+
+build:production:
+  stage: build
+  script:
+    - echo "Building"
+    - CI=false PUBLIC_URL="" npm run build
+    - echo "Zipping up files pre-deployment"
+    - gzip -k -9 $(find build -type f)
+  artifacts:
+    paths:
+      - build
+    expire_in: 60 mins
+  when: manual
   only:
     - master
     - dev
@@ -79,17 +82,21 @@ optimize:
 pages:
   stage: deploy
   script:
-    - echo "Deploying Build to Preliminary (Pages)"
+    - echo "Deploying Build to Staging (Pages)"
     - rm -rfv public # Remove the existing public folder
     - mkdir -pv public # Create a new empty public folder
     - cp -rpv build/* public # Copy build files to public dir for Gitlab Pages
     - cp -pv public/index.html public/404.html
+  environment:
+    name: Staging
+    url: https://maxlepper.gitlab.io/portfolio
   artifacts:
     paths:
       - public # The built files for Gitlab Pages to serve. MUST be "public"
     expire_in: 60 mins
   dependencies:
-    - optimize
+    - build:staging
+  needs: ["build:staging"]
   only:
     - master
     - dev
@@ -101,17 +108,20 @@ firebase:
     - (if [ -d "build" ]; then echo "Found build folder"; else exit "No build folder found, try running pipeline again"; fi);
     - npm install -g firebase-tools
   script:
-    - echo "Deploying build to Firebase"
+    - echo "Deploying build to Production (Firebase)"
     - mkdir firedeploy
     - cp -rpv build/* firedeploy
     - firebase deploy -m "Pipeline $CI_PIPELINE_ID, commit $CI_COMMIT_TAG" --non-interactive --token $FIREBASE_DEPLOY_KEY
+  environment:
+    name: Production
+    url: https://maxlepper.me
   artifacts:
     paths:
       - firedeploy
     expire_in: 60 mins
   dependencies:
-    - optimize
-  when: manual
+    - build:production
+  needs: ["build:production"]
   only:
     - master
 
