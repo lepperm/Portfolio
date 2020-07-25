@@ -56,7 +56,6 @@ build:staging:
     paths:
       - build
     expire_in: 60 mins
-  when: manual
   only:
     - master
     - dev
