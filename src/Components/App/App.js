@@ -31,26 +31,42 @@ import GradeIcon from "@material-ui/icons/Grade";
 import SchoolIcon from "@material-ui/icons/School";
 import CardMembershipIcon from "@material-ui/icons/CardMembership";
 import ExploreIcon from "@material-ui/icons/Explore";
-import { ReactComponent as GitLabIcon } from "./images/icons/gitlab_icon.svg";
+
+// PLUGINS
+//import "lazysizes"; // Need to see how
+
+// SVGS
+import { ReactComponent as GitLabIcon } from "../../images/icons/gitlab_icon.svg";
+import { ReactComponent as ArrowPrimary } from "../../ui/arrow_primary.svg";
+
+// IMAGES
+import agwsuImg from "../../images/photos/agwsu.webp";
+import learningLogImg from "../../images/photos/LearningLog.webp";
+import rttdImg from "../../images/photos/RealtimeTo-Do.webp";
+
+// DOCUMENTS
+import resumeDoc from "../../docs/ML_070820_resume.pdf";
 
 // ANIMATION AND SPECIAL EFFECTS
 import { motion } from "framer-motion";
 
-// SVGS
-import { ReactComponent as ArrowPrimary } from "./ui/arrow_primary.svg";
-
-// DOCUMENTS
-import resumeDoc from "./docs/ML_070820_resume.pdf";
-
-// IMAGES
-import agwsuImg from "./images/photos/agwsu.webp";
-import firstKommandImg from "./images/photos/FirstKommand.webp";
-import rttdImg from "./images/photos/RealtimeTo-Do.webp";
-
 // STYLE
 import "./App.css";
 
+function testWebP() {
+  return new Promise((res) => {
+    const webP = new Image();
+    webP.src =
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA";
+    webP.onload = webP.onerror = () => {
+      res(webP.height === 2);
+    };
+  });
+}
+
 function App() {
+  let webpEnabled = testWebP();
+
   return (
     <div className="App" style={{ height: "100vh", overflow: "hidden" }}>
       <div className="AppContent">
@@ -278,15 +294,14 @@ function App() {
               </CardActionArea>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
-              <Tooltip
-                title="I was not involved in the website development, but rather the software controlling the system on these cement trucks. There are currently over 800 units in the field, and the system is capabile of over 12 million unique configurations."
-                placement="bottom"
-                arrow
-              >
-                <Card style={{ height: "100%" }}>
+              <CardActionArea href="https://maxlepper.gitlab.io/learning-log/">
+                <Card
+                  href="https://maxlepper.gitlab.io/learning-log/"
+                  style={{ height: "100%" }}
+                >
                   <CardMedia
-                    image={firstKommandImg}
-                    title="First Kommand CyKlone Mixer"
+                    image={learningLogImg}
+                    title="Learning Log"
                     style={{
                       height: 0,
                       backgroundPosition: "center 0",
@@ -296,11 +311,11 @@ function App() {
                   />
                   <CardContent>
                     <Typography variant="h4" style={{ fontSize: "1.25em" }}>
-                      First Kommand Cyklone Mixer <br />
+                      Learning Log <br />
                     </Typography>
                   </CardContent>
                 </Card>
-              </Tooltip>
+              </CardActionArea>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
               <CardActionArea href="https://realtime-to-do-225fa.web.app/">
@@ -415,7 +430,13 @@ function App() {
                     <ListItem>
                       <ListItemAvatar>
                         <Avatar>
-                          <ExploreIcon />
+                          <Tooltip
+                            title="My Eagle project was installing new landscape bed and plantings at the Lakota Early Childhood Learning Center."
+                            placement="bottom"
+                            arrow
+                          >
+                            <ExploreIcon />
+                          </Tooltip>
                         </Avatar>
                       </ListItemAvatar>
                       <ListItemText

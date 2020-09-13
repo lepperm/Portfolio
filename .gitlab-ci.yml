@@ -31,6 +31,10 @@ install:
     expire_in: 60 mins
     paths:
       - node_modules/
+  when: manual
+  only:
+    - master
+    - dev
 
 quality:jest:
   stage: quality
@@ -44,6 +48,11 @@ quality:jest:
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   # Extracts the final overall coverage percentage. Also configured in gitlab for history
   allow_failure: true
+  timeout: 2 mins
+  needs: ["install"]
+  only:
+    - master
+    - dev
 
 build:staging:
   stage: build
@@ -56,6 +65,8 @@ build:staging:
     paths:
       - build
     expire_in: 60 mins
+  when: manual
+  needs: ["install"]
   only:
     - master
     - dev
@@ -72,6 +83,7 @@ build:production:
       - build
     expire_in: 60 mins
   when: manual
+  needs: ["install"]
   only:
     - master
     - dev
@@ -88,7 +100,7 @@ pages:
     - cp -pv public/index.html public/404.html
   environment:
     name: Staging
-    url: https://maxlepper.gitlab.io/portfolio
+    url: $PRELIM_URL
     auto_stop_in: 1 day
   artifacts:
     paths:
@@ -114,7 +126,7 @@ firebase:
     - firebase deploy -m "Pipeline $CI_PIPELINE_ID, commit $CI_COMMIT_TAG" --non-interactive --token $FIREBASE_DEPLOY_KEY
   environment:
     name: Production
-    url: https://maxlepper.me
+    url: $LIVE_URL
     auto_stop_in: 1 day
   artifacts:
     paths:
@@ -139,6 +151,7 @@ lighthouse:pages:
       - ./report.html
     expire_in: 1 week
   needs: ["pages"]
+  when: manual
   only:
     - master
     - dev
@@ -157,6 +170,7 @@ lighthouse:firebase:
       - ./report.html
     expire_in: 1 week
   needs: ["firebase"]
+  when: manual
   only:
     - master
   allow_failure: true
