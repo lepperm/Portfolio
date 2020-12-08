@@ -7,15 +7,10 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Max is a passionate aspiring front-end developer, eager to drive value to your team!"
+      content="I am a passionate software developer, eager to deliver value to your team or project!"
     />
-    <title>Max Lepper - Web Portfolio</title>
     <link rel="canonical" href="https://maxlepper.me" />
-    <meta
-      name="keywords"
-      content="Max Lepper, Max, Lepper, front-end developer, front-end, web developer, developer, computer programmer, programmer, ReactJS, React, Redux, Firestorm, Leadership, Agile, Project Management, portfolio, resume"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192mask.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -30,7 +25,47 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <title>Max Lepper - Development Portfolio</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is your expertise?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "I am a driven self-directed developer focused in JavaScript and utilizing a React/Redux/Firebase stack, pursuing software development since mid-2020. Additionally, I have experience developing CI pipelines in GitLab and working with Jekyll.<br/><p>For the latest statistics on my technical skills, please view <a href=https://maxlepper.gitlab.io/learning-log/stats/#top-skills>the Stats page</a> on my personal learning blog.</p>"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is your career background?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "My career experience so far is as an industrial applications developer, specializing in mobile vehicles. I work with the sales team to solicit project requirements from customers, architect a solution to meet the customer's needs, perform development, and manage application lifecycle.<br /><p>I have extensive experience in quickly adapting and delivering value across diverse environments and industries.</p><br /><p>Additionally, I help to develop internal tools and documentation to streamline and/or automate processes with the approval of stakeholders.</p>"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where can I see what you are working on?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "I track my learning and project progress over on my personal blog, <a href=https://maxlepper.gitlab.io/learning-log/>Learning Log</a>. Here, you can read the history of my development journey, as well as current statistics accumulated from my logs that detail what skills I am developing, personal notes, and the learning resources I'm using to improve my technical skills."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I get in contact with you?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The easiest way is to send me a message through my <a href=https://docs.google.com/forms/d/e/1FAIpQLSfPFOqfb7Ig-44Lm7Sr7g0G62HkJwj2MDIe8YzUdYjz4-Aq_A/viewform>contact form</a>. You can also find me on Twitter <a href=https://twitter.com/MaxLepper>@MaxLepper</a>. I'm looking forward to hearing from you!"
+            }
+          }
+        ]
+      }
+    </script>
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=UA-172983308-1"
@@ -41,24 +76,18 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "UA-172983308-1");
     </script>
-    <noscript>
-      <link rel="stylesheet" type="text/css" href="/index.css" />
-    </noscript>
   </head>
   <body>
     <noscript>
-      <div class="staggerWrapper">
-        <div class="staggerA" style="opacity: 0;"><h1>Hello there!</h1></div>
-        <div class="staggerB" style="opacity: 0;">
-          My name is Max. Thank you for visiting my portfolio page.
-        </div>
-        <div class="staggerC" style="opacity: 0;">
+      <div>
+        <h1>Hello there!</h1>
+        <p>My name is Max, and thank you for visiting my portfolio page.</p>
+        <div>
           <p>
             It looks like you do not currently have JavaScript enabled, which is
-            the programming language that powers my site.
+            used to power my site.
           </p>
           <form action="https://enable-javascript.com/">
             <input
@@ -67,17 +96,14 @@
               value="Help me enable JavaScript"
             />
           </form>
-          <p>
-            I would love to share my work with you!<br /><br />Here is a link to
-            my <a href="/docs/ML_070820_resume.pdf">resume.</a>
-          </p>
+          <p>I would love to share my work with you!</p>
         </div>
-        <div class="staggerD" style="opacity: 0;">
+        <p>
           If you would like to learn more about me, you can find me online at
           the following sites:
-          <br /><br />&nbsp;
-        </div>
-        <div class="siteLinks staggerD" style="opacity: 0;">
+        </p>
+        <br />
+        <div>
           <div>
             <a href="https://gitlab.com/maxlepper">
               <svg
@@ -125,6 +151,7 @@
               GitLab
             </a>
           </div>
+          <br />
           <div>
             <a href="https://www.linkedin.com/in/maxlepper/">
               <svg
@@ -156,10 +183,55 @@
               LinkedIn
             </a>
           </div>
+          <br />
+          <div>
+            <a href="https://twitter.com/MaxLepper">
+              <svg
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                width="40px"
+                height="40px"
+                viewBox="0 0 400 400"
+                style="enable-background: new 0 0 400 400"
+                xml:space="preserve"
+              >
+                <style type="text/css">
+                  .st0 {
+                    fill: #1da1f2;
+                  }
+                  .st1 {
+                    fill: #ffffff;
+                  }
+                </style>
+                <g id="Dark_Blue">
+                  <path
+                    class="st0"
+                    d="M350,400H50c-27.6,0-50-22.4-50-50V50C0,22.4,22.4,0,50,0h300c27.6,0,50,22.4,50,50v300
+		C400,377.6,377.6,400,350,400z"
+                  />
+                </g>
+                <g id="Logo__x2014__FIXED">
+                  <path
+                    class="st1"
+                    d="M153.6,301.6c94.3,0,145.9-78.2,145.9-145.9c0-2.2,0-4.4-0.1-6.6c10-7.2,18.7-16.3,25.6-26.6
+		c-9.2,4.1-19.1,6.8-29.5,8.1c10.6-6.3,18.7-16.4,22.6-28.4c-9.9,5.9-20.9,10.1-32.6,12.4c-9.4-10-22.7-16.2-37.4-16.2
+		c-28.3,0-51.3,23-51.3,51.3c0,4,0.5,7.9,1.3,11.7c-42.6-2.1-80.4-22.6-105.7-53.6c-4.4,7.6-6.9,16.4-6.9,25.8
+		c0,17.8,9.1,33.5,22.8,42.7c-8.4-0.3-16.3-2.6-23.2-6.4c0,0.2,0,0.4,0,0.7c0,24.8,17.7,45.6,41.1,50.3c-4.3,1.2-8.8,1.8-13.5,1.8
+		c-3.3,0-6.5-0.3-9.6-0.9c6.5,20.4,25.5,35.2,47.9,35.6c-17.6,13.8-39.7,22-63.7,22c-4.1,0-8.2-0.2-12.2-0.7
+		C97.7,293.1,124.7,301.6,153.6,301.6"
+                  />
+                </g>
+              </svg>
+              <br />
+              Twitter
+            </a>
+          </div>
         </div>
-        <div class="staggerE" style="opacity: 0;">
-          Thank you!
-        </div>
+        <br /><br />
+        <div>Thank you!</div>
       </div>
     </noscript>
     <div id="root"></div>

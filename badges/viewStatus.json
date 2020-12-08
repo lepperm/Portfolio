@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "label": "View Status",
-  "message": "Needs device testing",
-  "color": "yellowgreen",
+  "message": "Redesigning",
+  "color": "yellow",
   "style": "flat"
 }

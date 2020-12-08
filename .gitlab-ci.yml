@@ -1,21 +1,16 @@
-# Using local node image to build the React app
-image: node:12.18.0
+image: node:latest
 
-# Announce the URL as per CRA docs (moved to build stage)
-# https://create-react-app.dev/docs/advanced-configuration/
 variables:
-  PRELIM_URL: "https://maxlepper.gitlab.io/portfolio/"
-  LIVE_URL: "https://maxlepper.me"
+  STAGING_URL: "https://maxlepper.gitlab.io/portfolio"
+  PRODUCTION_URL: "https://maxlepper.me/"
 
-# Cache node modules - speeds up future builds
 cache:
   paths:
     - node_modules/
 
-# Name the stages involved in the pipeline
 stages:
   - install
-  - quality
+  - test
   - build
   - deploy
   - audit
@@ -24,7 +19,7 @@ install:
   stage: install
   script:
     - echo "Installing dependencies"
-    - npm install # Install all dependencies
+    - npm install
   artifacts:
     name: "artifacts"
     untracked: true
@@ -36,8 +31,8 @@ install:
     - master
     - dev
 
-quality:jest:
-  stage: quality
+test:
+  stage: test
   script:
     - echo "Running tests"
     # CI=true will tell Jest to not run in watch mode
@@ -45,10 +40,10 @@ quality:jest:
     # --coverage generates a human-readable summary of testing
     # --watchAll=false should force tests to run once, if CI=true doesn't
     - CI=true npm test -- --env=jsdom --coverage --watchAll=false
-  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  coverage: /All files[^|]*|[^|]*s+([d.]+)/
   # Extracts the final overall coverage percentage. Also configured in gitlab for history
   allow_failure: true
-  timeout: 2 mins
+  timeout: 15 mins
   needs: ["install"]
   only:
     - master
@@ -60,7 +55,7 @@ build:staging:
     - echo "Building"
     - CI=false PUBLIC_URL="/portfolio" npm run build #  CI=false will allow our build to complete with warnings
     - echo "Zipping up files pre-deployment"
-    - gzip -k -9 $(find build -type f)
+    - gzip -k -9 $(find build -type f) # Gitlab CI does not dynamically gzip assets
   artifacts:
     paths:
       - build
@@ -77,7 +72,7 @@ build:production:
     - echo "Building"
     - CI=false PUBLIC_URL="" npm run build
     - echo "Zipping up files pre-deployment"
-    - gzip -k -9 $(find build -type f)
+    - gzip -k -9 $(find build -type f) # As of 11/2019, Firebase is inconsistent about serving dynamically zipped assets
   artifacts:
     paths:
       - build
@@ -86,9 +81,8 @@ build:production:
   needs: ["install"]
   only:
     - master
-    - dev
 
-# Job name for gitlab to recognise this results in assets for Gitlab Pages
+# Job name for gitlab to recognize this results in assets for Gitlab Pages
 # https://docs.gitlab.com/ee/user/project/pages/introduction.html#gitlab-pages-requirements
 pages:
   stage: deploy
@@ -96,11 +90,11 @@ pages:
     - echo "Deploying Build to Staging (Pages)"
     - rm -rfv public # Remove the existing public folder
     - mkdir -pv public # Create a new empty public folder
-    - cp -rpv build/* public # Copy build files to public dir for Gitlab Pages
+    - cp -rpv build/* public # Copy build files to public dir for Gitlab Pages (mandatory)
     - cp -pv public/index.html public/404.html
   environment:
     name: Staging
-    url: $PRELIM_URL
+    url: $STAGING_URL
     auto_stop_in: 1 day
   artifacts:
     paths:
@@ -121,16 +115,14 @@ firebase:
     - npm install -g firebase-tools
   script:
     - echo "Deploying build to Production (Firebase)"
-    - mkdir firedeploy
-    - cp -rpv build/* firedeploy
     - firebase deploy -m "Pipeline $CI_PIPELINE_ID, commit $CI_COMMIT_TAG" --non-interactive --token $FIREBASE_DEPLOY_KEY
   environment:
     name: Production
-    url: $LIVE_URL
+    url: $PRODUCTION_URL
     auto_stop_in: 1 day
   artifacts:
     paths:
-      - firedeploy
+      - build
     expire_in: 60 mins
   dependencies:
     - build:production
@@ -145,7 +137,7 @@ lighthouse:pages:
   before_script:
     - npm i -g lighthouse
   script:
-    - lighthouse --chrome-flags="--headless --no-sandbox" $PRELIM_URL --output html --output-path ./report.html
+    - lighthouse --chrome-flags="--headless --no-sandbox" $STAGING_URL --output html --output-path ./report.html
   artifacts:
     paths:
       - ./report.html
@@ -164,7 +156,7 @@ lighthouse:firebase:
   before_script:
     - npm i -g lighthouse
   script:
-    - lighthouse --chrome-flags="--headless --no-sandbox" $LIVE_URL --output html --output-path ./report.html
+    - lighthouse --chrome-flags="--headless --no-sandbox" $PRODUCTION_URL --output html --output-path ./report.html
   artifacts:
     paths:
       - ./report.html

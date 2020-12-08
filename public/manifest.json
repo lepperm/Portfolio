@@ -1,6 +1,6 @@
 {
-  "short_name": "Max Portfolio",
-  "name": "Max Lepper Web Portfolio",
+  "short_name": "Max Lepper",
+  "name": "Max Lepper - Development Portfolio",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,16 +8,14 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192mask.png",
+      "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any maskable"
+      "sizes": "192x192"
     },
     {
-      "src": "logo512mask.png",
+      "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any maskable"
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
