@@ -1,3 +1,7 @@
+/**
+ * @fileoverview {{ name }} component.
+ */
+
 {{#if typescript}}
 import * as React from "react";
 {{else}}
@@ -13,6 +17,11 @@ import React from "react";
 };
 {{/if}}
 
+/**
+ * {{ name }} component
+ *
+ * @return {Component} {{ name }} component
+ */
 {{#if export }}export {{/if}}const {{ name }}{{#if typescript}}: React.FC<
   {{~#if proptypes~}} {{ name ~}} Props {{~else~}} any {{~/if}}> {{~/if}} = () => {
   return (
@@ -21,6 +30,9 @@ import React from "react";
 };
 
 {{#if proptypes~}}
+/**
+ * Prop types for {{ name }} component
+ */
 {{ name }}.propTypes = {
   //
 };
