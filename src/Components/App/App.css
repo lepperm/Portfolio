@@ -1,0 +1,9 @@
+@font-face {
+  font-family: Ubuntu;
+  src: url("../../fonts/ubuntu/Ubuntu-Bold.ttf");
+}
+
+@font-face {
+  font-family: Poppins;
+  src: url("../../fonts/poppins/Poppins-Light.ttf");
+}

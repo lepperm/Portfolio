@@ -1,13 +1,24 @@
+/**
+ * @fileoverview Entry point for Portfolio application
+ */
 import React from "react";
 import ReactDOM from "react-dom";
+
+// MUI
+import { ThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+
+import { App } from "./Components/App";
+
 import "./index.css";
-import App from "./App";
+import { siteTheme } from "./themes";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <ThemeProvider theme={siteTheme}>
+    <CssBaseline />
     <App />
-  </React.StrictMode>,
+  </ThemeProvider>,
   document.getElementById("root")
 );
 

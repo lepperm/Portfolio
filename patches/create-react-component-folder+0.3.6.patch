@@ -1,0 +1,67 @@
+diff --git a/node_modules/create-react-component-folder/README.md b/node_modules/create-react-component-folder/README.md
+index 5dc0500..ac55639 100644
+--- a/node_modules/create-react-component-folder/README.md
++++ b/node_modules/create-react-component-folder/README.md
+@@ -133,7 +133,8 @@ So now all you have to do is type **npx crcf componentName** and you will get al
+   "proptypes",
+   "stories",
+   "nosemi",
+-  "cssmodules"
++  "singlequote",
++  "cssmodules",
+   "namedexports",
+   "graphql",
+   "stylesext",
+@@ -213,6 +214,7 @@ $ npx crcf create --help
+     -h, --help          output usage information
+     -sb, --stories      Add Storie file to component
+     -ns, --nosemi       No semicolons
++    -sq, --singlequote  Formats output files with single quotes
+     -x, --namedexports  Creates files using named exports
+ ```
+ 
+diff --git a/node_modules/create-react-component-folder/lib/index.js b/node_modules/create-react-component-folder/lib/index.js
+index 570ed9f..3816df0 100644
+--- a/node_modules/create-react-component-folder/lib/index.js
++++ b/node_modules/create-react-component-folder/lib/index.js
+@@ -84,6 +84,11 @@ function createFiles(componentName, componentPath, cssFileExt) {
+       prettierOptions = { semi: false };
+     }
+ 
++    // Set single quote option
++    if (config.hasFlag('singlequote')) {
++      prettierOptions = { singleQuote: true };
++    }
++
+     // Add test
+     if (!config.hasFlag('notest')) {
+       if (config.hasFlag('spec')) {
+diff --git a/node_modules/create-react-component-folder/lib/options.js b/node_modules/create-react-component-folder/lib/options.js
+index 5df0dee..952204a 100644
+--- a/node_modules/create-react-component-folder/lib/options.js
++++ b/node_modules/create-react-component-folder/lib/options.js
+@@ -109,6 +109,12 @@ const getOptions = () => [
+     description: 'No semicolons',
+     defaultValue: config.hasFlag('nosemi'),
+   },
++  {
++    name: 'singlequote',
++    flags: '-sq, --singlequote',
++    description: 'Formats output files with single quotes',
++    defaultValue: config.hasFlag('singlequote'),
++  },
+   {
+     name: 'output',
+     flags: '-o, --output <directory>',
+diff --git a/node_modules/create-react-component-folder/lib/utils/format.js b/node_modules/create-react-component-folder/lib/utils/format.js
+index d45d25d..5a37e5f 100644
+--- a/node_modules/create-react-component-folder/lib/utils/format.js
++++ b/node_modules/create-react-component-folder/lib/utils/format.js
+@@ -13,7 +13,6 @@ function formatPrettier(str, parser = 'babel', optionsOverride) {
+     printWidth: 100,
+     semi: true,
+     trailingComma: 'es5',
+-    singleQuote: true,
+     parser,
+   };
+   const opt = { ...prettierOptions, ...optionsOverride };

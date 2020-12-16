@@ -11,11 +11,13 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
     "firebase": "^8.1.2",
+    "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-update-url-on-scroll": "^3.5.0",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -24,7 +26,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "postinstall": "patch-package"
   },
   "eslintConfig": {
     "extends": [
@@ -48,7 +51,6 @@
     "functional",
     "namedexports",
     "proptypes",
-    "scss",
     "stories",
     "uppercase",
     {
@@ -64,6 +66,7 @@
     "@storybook/react": "^6.1.10",
     "create-react-component-folder": "^0.3.6",
     "eslint-plugin-prettier": "^3.2.0",
+    "patch-package": "^6.2.2",
     "prettier": "^2.2.1"
   }
 }
