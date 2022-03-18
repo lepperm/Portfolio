@@ -5,6 +5,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+let currentYear = "2022";
+
+currentYear = new Date().getFullYear();
+
 /**
  * Footer component
  *
@@ -19,7 +23,7 @@ export const Footer = () => {
         <a href="#GitLab#">GitLab</a>
       </nav>
       <aside id="copyright">
-        <p>Max Lepper © 2020</p>
+        <p>Max Lepper © {currentYear}</p>
       </aside>
       <p>
         Could the footer unload/expand to reveal more details once the user

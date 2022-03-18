@@ -15,7 +15,10 @@ export const IntroSection = () => {
     <section id="introduction">
       <header>
         <h1>Hi, I'm Max!</h1>
-        <h2>I'm a software developer focused in React from Dayton, Ohio.</h2>
+        <h2>
+          I help clients solve problems with tailor-designed software solutions.
+        </h2>
+        <p>Have a challenge you're looking to solve? Let's talk!</p>
       </header>
     </section>
   );

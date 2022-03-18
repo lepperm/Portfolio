@@ -48,7 +48,6 @@ export const App = (props) => {
         <IntroSection />
         <CarouselSection />
         <ListSection />
-        <ListSection />
         <ContactSection />
       </main>
       <Footer />

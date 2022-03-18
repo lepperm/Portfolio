@@ -16,7 +16,10 @@ import { TitleAndTextBlock } from "../TitleAndTextBlock";
 export const ListSection = () => {
   return (
     <section>
-      <TitleAndTextBlock />
+      <TitleAndTextBlock
+        title="List Section"
+        message="The list section component."
+      />
       <ListBlock />
       <p>
         List section. Maybe this could take props to either stack vertically or
