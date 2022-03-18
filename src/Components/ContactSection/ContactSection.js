@@ -17,7 +17,7 @@ export const ContactSection = () => {
         action="https://docs.google.com/forms/d/e/1FAIpQLSfPFOqfb7Ig-44Lm7Sr7g0G62HkJwj2MDIe8YzUdYjz4-Aq_A/formResponse"
         method="post"
       >
-        <label for="email">Email Address*</label>
+        <label htmlFor="email">Email Address*</label>
         <input
           type="email"
           placeholder="your.email@gmail.com"
@@ -25,21 +25,21 @@ export const ContactSection = () => {
           aria-label="Your email"
           required
         />
-        <label for="entry.2005620554">Name*</label>
+        <label htmlFor="entry.2005620554">Name*</label>
         <input
           type="text"
           placeholder="Your name"
           name="entry.2005620554"
           required
         />
-        <label for="entry.514139982">Phone</label>
+        <label htmlFor="entry.514139982">Phone</label>
         <input
           type="tel"
           placeholder="123-456-7890"
           name="entry.514139982"
           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
         />
-        <label for="entry.839337160">Message*</label>
+        <label htmlFor="entry.839337160">Message*</label>
         <textarea
           rows="5"
           placeholder=""
